@@ -15,30 +15,26 @@ def _merge(left_list, right_list):
         if left_list[l_index] <= right_list[r_index]:
              merged_list.append(left_list[l_index])
              l_index = l_index + 1
+             if l_index == len(left_list):
+                 merged_list.extend(right_list[r_index:])
+                 break
         else:
              merged_list.append(right_list[r_index])
              r_index = r_index + 1
+             if r_index == len(right_list):
+                 merged_list.extend(left_list[l_index:])
+                 break
 
     return merged_list
 
 def mergesort(unsorted_list):
     if len(unsorted_list) <= 1:
-        print unsorted_list
         return unsorted_list
 
-    midpoint = (len(unsorted_list) - 1) // 2
+    midpoint = len(unsorted_list) // 2
 
     left_list = unsorted_list[0:midpoint]
-    right_list = unsorted_list[midpoint+1:len(unsorted_list)-1]
-
-    if left_list is None:
-        left_list = []
-
-    if right_list is None:
-        right_list = []
-
-    print left_list
-    print right_list
+    right_list = unsorted_list[midpoint:]
 
     r_left_list = mergesort(left_list)
     r_right_list = mergesort(right_list)
