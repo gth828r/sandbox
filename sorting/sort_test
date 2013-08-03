@@ -1,0 +1,13 @@
+#!/usr/bin/python
+
+from quicksort import quicksort
+
+unsorted_list = [6, 4, 3, 9, 1, 7, 8, 10, 2, 5, 6, 6, 7, 7, 12, 53, 61, 631, 6, 3, 6, 78, 2, 6, 3, 1, 8, 32, 64, 73, 23, 3, 1, 62, 99]
+
+print "Unsorted list: "
+print unsorted_list
+
+sorted_list = quicksort(unsorted_list)
+
+print "Quicksort results: "
+print sorted_list
