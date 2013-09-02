@@ -4,11 +4,11 @@ import java.util.Collection;
 public class Vertex<Value> {
 
   protected Value value;
-  protected HashMap<Value, Vertex> neighbors;
+  protected HashMap<Value, Vertex<Value>> neighbors;
 
   public Vertex(Value value) {
     this.value = value;
-    neighbors = new HashMap<Value, Vertex>();
+    neighbors = new HashMap<Value, Vertex<Value>>();
   }
 
   public void setValue(Value value) {
@@ -31,7 +31,7 @@ public class Vertex<Value> {
     return neighbors.containsKey(v.getValue());
   }
 
-  public Collection listNeighbors() {
+  public Collection<Vertex<Value>> listNeighbors() {
     return neighbors.values();
   }
 
