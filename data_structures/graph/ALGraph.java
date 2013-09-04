@@ -2,53 +2,30 @@ import java.util.HashMap;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class ALGraph<Value> extends Graph<Value> {
+public abstract class ALGraph<Value> extends Graph<Value> {
 
   private static final boolean DEBUG_ON = false;
 
   protected HashMap<Value, Vertex<Value>> vertexList;    
 
   public ALGraph() {
+    this.vertexList = new HashMap<Value, Vertex<Value>>();
+  }
+
+  public ALGraph(boolean isDirected) {
     vertexList = new HashMap<Value, Vertex<Value>>();
   }
 
-  public void addEdge(Value value1, Value value2) {
-    Vertex<Value> v1 = vertexList.get(value1);
-    Vertex<Value> v2 = vertexList.get(value2);
-   
-    if (v1 != null && v2 != null) {
-      v1.addNeighbor(v2);
-    }
-  }
+  public abstract void addEdge(Value value1, Value value2);
 
-  public void deleteEdge(Value value1, Value value2) {
-    Vertex<Value> v1 = vertexList.get(value1);
-    Vertex<Value> v2 = vertexList.get(value2);
-   
-    if (v1 != null && v2 != null) {
-      v1.deleteNeighbor(v2);
-    }
-  }
+  public abstract void deleteEdge(Value value1, Value value2);
 
   public void addVertex(Value value) {
     Vertex<Value> v = new Vertex<Value>(value);
     vertexList.put(value, v);
   }
 
-  public void deleteVertex(Value value) {
-    Vertex<Value> toDelete = vertexList.get(value);
-
-    if (toDelete != null) {
-
-      for (Vertex<Value> vertex : vertexList.values()) {
-        if (vertex.isNeighbor(toDelete)) {
-          vertex.deleteNeighbor(toDelete);
-        }
-      }
-
-      vertexList.remove(value);
-    }
-  }
+  public abstract void deleteVertex(Value value);
 
   public boolean contains(Value value) {
     return vertexList.containsKey(value);

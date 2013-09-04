@@ -1,5 +1,7 @@
 public abstract class Graph<Value> {
 
+  protected boolean isDirected;
+
   public abstract void addEdge(Value value1, Value value2);
 
   public abstract void deleteEdge(Value value1, Value value2);

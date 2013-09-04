@@ -1,7 +1,7 @@
 public class Test {
 
   public static void main(String args[]) {
-    Graph<Integer> myGraph = new ALGraph<Integer>();
+    Graph<Integer> myGraph = new UndirectedALGraph<Integer>();
 
     myGraph.addVertex(1);
     myGraph.addVertex(2);
