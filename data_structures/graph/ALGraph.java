@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class ALGraph<Value> {
+public class ALGraph<Value> extends Graph<Value> {
 
   protected HashMap<Value, Vertex<Value>> vertexList;    
 
@@ -108,5 +108,23 @@ public class ALGraph<Value> {
     }
 
     return null;
+  }
+
+  public String toString() {
+    StringBuilder graphStr = new StringBuilder();
+
+    for (Vertex<Value> vertex : vertexList.values()) {
+      graphStr.append(vertex.toString());
+      graphStr.append(" -> ");
+      
+      for (Vertex<Value> neighbor : vertex.listNeighbors()) {
+        graphStr.append(neighbor.toString());
+        graphStr.append(", ");
+      }
+
+      graphStr.append("\n");
+    }
+
+    return graphStr.toString();
   }
 }
