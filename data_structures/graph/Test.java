@@ -34,5 +34,8 @@ public class Test {
     myGraph.deleteVertex(3);
 
     System.out.println(myGraph.toString());
+
+    System.out.println("BFS result: " + myGraph.bfs(8, 1));
+    System.out.println("DFS result: " + myGraph.dfs(8, 1));
   }
 }

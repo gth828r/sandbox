@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 public class ALGraph<Value> extends Graph<Value> {
 
+  private static final boolean DEBUG_ON = false;
+
   protected HashMap<Value, Vertex<Value>> vertexList;    
 
   public ALGraph() {
@@ -67,6 +69,10 @@ public class ALGraph<Value> extends Graph<Value> {
       // remove next element from the queue
       Vertex<Value> probe = queue.remove();
 
+      if (DEBUG_ON) {
+        System.err.println(probe);
+      }
+
       // if we find the vertex we want, just return it
       if (toFind.equals(probe.getValue())) {
         return probe;
@@ -92,6 +98,10 @@ public class ALGraph<Value> extends Graph<Value> {
 
   protected Vertex<Value> dfs(Value toFind, Vertex<Value> probe, HashMap<Value, Vertex<Value>> visited) {  
     
+    if (DEBUG_ON) {
+      System.err.println(probe);
+    }
+
     // if this is the value we are looking for, return it
     if (toFind.equals(probe.getValue())) {
       return probe;
