@@ -55,7 +55,8 @@ public abstract class ALGraph<Value> extends Graph<Value> {
         return probe;
       }
 
-      for (Vertex<Value> vertex : probe.listNeighbors()) {
+      for (Edge<Value> edge : probe.listNeighbors()) {
+        Vertex<Value> vertex = edge.getVertex();
         if (!visited.containsKey(vertex.getValue())) {
           visited.put(vertex.getValue(), vertex);
           queue.add(vertex);
@@ -84,7 +85,9 @@ public abstract class ALGraph<Value> extends Graph<Value> {
       return probe;
     }
 
-    for (Vertex<Value> vertex : probe.listNeighbors()) {
+    for (Edge<Value> edge : probe.listNeighbors()) {
+      Vertex<Value> vertex = edge.getVertex();
+
       if (!visited.containsKey(vertex.getValue())) {
         visited.put(vertex.getValue(), vertex);
         Vertex<Value> result = dfs(toFind, vertex, visited);
@@ -102,11 +105,14 @@ public abstract class ALGraph<Value> extends Graph<Value> {
 
     for (Vertex<Value> vertex : vertexList.values()) {
       graphStr.append(vertex.toString());
-      graphStr.append(" -> ");
+      graphStr.append(": ");
       
-      for (Vertex<Value> neighbor : vertex.listNeighbors()) {
+      for (Edge<Value> edge : vertex.listNeighbors()) {
+        Vertex<Value> neighbor = edge.getVertex();
+        graphStr.append("\n  ");
+        graphStr.append(edge.toString());
+        graphStr.append(" ");
         graphStr.append(neighbor.toString());
-        graphStr.append(", ");
       }
 
       graphStr.append("\n");
