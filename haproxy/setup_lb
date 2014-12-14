@@ -1,0 +1,5 @@
+#! /bin/bash
+
+add-apt-repository -y ppa:vbernat/haproxy-1.5
+apt-get update
+apt-get install -y haproxy vim-haproxy
