@@ -1,0 +1,22 @@
+Need to install vagrant:
+
+  sudo apt-get install vagrant
+
+
+Need to install ansible:
+
+  sudo apt-get install ansible
+
+
+Need to install an haproxy ansible module with:
+
+  sudo ansible-galaxy install info.haproxy
+
+Documentation for this module is at: https://galaxy.ansible.com/list#/roles/912
+
+
+Neet to install an nginx module with:
+
+  sudo ansible-galaxy install bennojoy.nginx
+
+Documentation for this module is at: https://galaxy.ansible.com/list#/roles/2

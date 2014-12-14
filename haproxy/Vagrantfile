@@ -9,20 +9,36 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.define "lb" do |lb|
+  config.vm.define :lb do |lb|
     lb.vm.box = "ubuntu/trusty64"
-    lb.vm.provision :shell, path: "setup_lb"
+
+    # Use ansible for provisioning
+    lb.vm.provision :ansible do |ansible|
+      ansible.playbook = "ansible/lb-playbook.yml"
+      ansible.limit = "all"
+      ansible.groups = { "lbs" => ["lb"] }
+      ansible.extra_vars = { ansible_ssh_user: 'vagrant' }
+      ansible.sudo = true
+    end
+
+    # Test locally with port 8081
     lb.vm.network :forwarded_port, host: 8081, guest: 80
+
+    # Set up network between the load balancer and web servers
     lb.vm.network "private_network", ip: "192.168.5.100"
   end
 
+  # Set up multiple web servers
   (1..2).each do |i|
     config.vm.define "web#{i}" do |web|
       web.vm.box = "ubuntu/trusty64"
       web.vm.provision :shell, path: "setup_web"
+
+      # Set up network between the load balancer and web servers
       web.vm.network "private_network", ip: "192.168.5.10#{i}"
     end
   end
+
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

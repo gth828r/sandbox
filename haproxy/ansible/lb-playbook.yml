@@ -1,0 +1,29 @@
+- hosts: lbs
+  roles:
+    - role: info.haproxy
+      haproxy_defaults:
+        mode: http
+
+      haproxy_frontends:
+      - name: 'tupty-lb'
+        ip: '10.0.2.15'
+        port: '80'
+        default_backend: 'tupty-web'
+
+      haproxy_backends:
+      - name: 'tupty-web'
+        description: 'tupty test load balanced web app'
+        balance: 'roundrobin'
+        options:
+        - forwardfor
+        servers:
+        - name: 'web1'
+          ip: '192.168.5.101'
+          port: '80'
+          params:
+          - check
+        - name: 'web2'
+          ip: '192.168.5.102'
+          port: '80'
+          params:
+          - check
