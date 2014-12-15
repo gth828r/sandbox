@@ -1,0 +1,9 @@
+---
+- name: Create web root
+  file: dest={{ webroot }} mode=775 state=directory
+        owner={{ webuser }} group={{ webgroup }}
+  register: webrootcreated
+
+- name: Install index
+  template: src=tupty.j2 dest={{ webroot }}/index.html mode=775
+  when: webrootcreated|success

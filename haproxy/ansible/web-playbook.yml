@@ -1,0 +1,16 @@
+---
+- hosts: web
+  roles:
+    - role: jdauphant.nginx
+      nginx_max_clients: 512
+      nginx_user: "{{ webuser }}"
+
+      nginx_sites:
+        default:
+        - listen 80
+        - server_name localhost
+        - root "{{ webroot }}"
+        - location / { try_files $uri /index.html; }
+
+    # Set up site specific configuration
+    - role: tuptysite

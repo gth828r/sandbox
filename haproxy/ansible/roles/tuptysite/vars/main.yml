@@ -1,0 +1,4 @@
+---
+webroot: /var/www
+webuser: www-data
+webgroup: www-data

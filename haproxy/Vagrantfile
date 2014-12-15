@@ -32,7 +32,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   (1..2).each do |i|
     config.vm.define "web#{i}" do |web|
       web.vm.box = "ubuntu/trusty64"
-      web.vm.provision :shell, path: "setup_web"
+
+      # Use ansible for provisioning
+      web.vm.provision :ansible do |ansible|
+        ansible.playbook = "ansible/web-playbook.yml"
+        ansible.limit = "all"
+        ansible.groups = { "web" => ["web#{i}"] }
+        ansible.extra_vars = { ansible_ssh_user: 'vagrant' }
+        ansible.sudo = true
+      end
 
       # Set up network between the load balancer and web servers
       web.vm.network "private_network", ip: "192.168.5.10#{i}"

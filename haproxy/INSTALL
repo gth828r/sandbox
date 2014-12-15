@@ -17,6 +17,6 @@ Documentation for this module is at: https://galaxy.ansible.com/list#/roles/912
 
 Neet to install an nginx module with:
 
-  sudo ansible-galaxy install bennojoy.nginx
+  sudo ansible-galaxy install jdauphant.nginx
 
-Documentation for this module is at: https://galaxy.ansible.com/list#/roles/2
+Documentation for this module is at: https://galaxy.ansible.com/list#/roles/466
