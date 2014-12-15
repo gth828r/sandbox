@@ -1,3 +1,4 @@
+---
 - hosts: lbs
   roles:
     - role: info.haproxy
